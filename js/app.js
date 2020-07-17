@@ -10,7 +10,7 @@ let editedItemID = 0;
 
 const url = 'https://5f11228a65dd950016fbd036.mockapi.io/items';
 
-httpForm.addEventListener('click', submitItems)
+httpForm.addEventListener('submit', submitItems)
 
 //submit items
 
@@ -102,5 +102,21 @@ function showItems(data){
 function postItemAPI(img, itemName){
     const avatar = `img/${img}.jpeg`;
     const name = itemName;
+    const url = 'https://5f11228a65dd950016fbd036.mockapi.io/items';
 
+    const ajax = new XMLHttpRequest();
+
+    ajax.open('POST', url, true);
+
+    ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+    ajax.onload = function(){
+       getItemsAPI(showItems);
+    }
+
+    ajax.onerror = function(){
+        console.log('there was an error');
+    }
+
+    ajax.send(`avatar=${avatar}&name=${name}`);
 }
