@@ -8,6 +8,60 @@ const feedback = document.querySelector(".feedback");
 const submtiBtn = document.getElementById("submitBtn");
 let editedItemID = 0;
 
-url = 'https://5f11228a65dd950016fbd036.mockapi.io/items';
+const url = 'https://5f11228a65dd950016fbd036.mockapi.io/items';
 
 // load
+
+document.addEventListener('DOMContentLoaded', function(){
+    getItemsAPI(showItems);
+})
+
+// get items from API
+
+function getItemsAPI(cb){
+    const url = 'https://5f11228a65dd950016fbd036.mockapi.io/items';
+
+    const ajax = new XMLHttpRequest();
+
+    ajax.open('GET', url, true);
+
+    ajax.onload = function(){
+        if (this.status === 200){
+            cb(this.responseText)
+        } else {
+            console.log('something went wrong');
+        }
+    }
+
+    ajax.onerror = function(){
+        console.log('there was an error');
+    }
+
+    ajax.send()
+}
+
+// Show items from API
+
+function showItems(data){
+    const items = JSON.parse(data);
+    
+    let info = '';
+
+    items.forEach(item => {
+        info += `<li class="list-group-item d-flex align-items-center justify-content-between flex-wrap item my-2">
+                <img src="${item.avatar}" id='itemImage' class='itemImage img-thumbnail' alt="">
+                <h6 id="itemName" class="text-capitalize itemName">${item.name}</h6>
+                <div class="icons">
+        
+                <a href='#' class="itemIcon mx-2 edit-icon" data-id='${item.id}'>
+                <i class="fa fa-edit"></i>
+                </a>
+                <a href='#' class="itemIcon mx-2 delete-icon" data-id='${item.id}'>
+                <i class="fa fa-trash"></i>
+                </a>
+                </div>
+        </li>`
+    })
+    
+    
+}
