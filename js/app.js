@@ -94,6 +94,7 @@ function showItems(data){
     })
      
     itemList.innerHTML = info;
+    getIcons();
     
 }
 
@@ -119,4 +120,55 @@ function postItemAPI(img, itemName){
     }
 
     ajax.send(`avatar=${avatar}&name=${name}`);
+}
+
+// get icons
+
+function getIcons(){
+    const getIcon = document.querySelectorAll('.edit-icon');
+    const deleteIcon = document.querySelectorAll('.delete-icon');
+
+    deleteIcon.forEach(icon => {
+        const itemID = icon.dataset.id;
+        icon.addEventListener('click', function(event){
+            event.preventDefault();
+            deleteItemAPI(itemID);
+            
+        })
+    })
+
+    editIcon.forEach(icon => {
+        const itemID = icon.dataset.id;
+        icon.addEventListener('click', function(event){
+            event.preventDefault();
+            const parent = event.target.parentElement.parentElement.parentElement;
+            const img = document.querySelector('.itemImage').src;
+            const name = document.querySelector('.itemName').textContent;
+            
+        })
+    })
+}
+
+// delete
+
+function deleteItemAPI(id){
+    const url = `https://5f11228a65dd950016fbd036.mockapi.io/items/${id}`;
+
+    const ajax = new XMLHttpRequest();
+
+    ajax.open('DELETE', url, true);
+
+    ajax.onload = function(){
+        if (this.status === 200){
+            getItemsAPI(showItems);
+        } else {
+            console.log('something went wrong');
+        }
+    }
+
+    ajax.onerror = function(){
+        console.log('there was an error');
+    }
+
+    ajax.send();
 }
