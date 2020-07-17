@@ -10,11 +10,41 @@ let editedItemID = 0;
 
 const url = 'https://5f11228a65dd950016fbd036.mockapi.io/items';
 
+httpForm.addEventListener('click', submitItems)
+
+//submit items
+
+function submitItems(e){
+    e.preventDefault()
+    const itemValue = itemInput.value;
+    const imageValue = imageInput.value;
+
+    if (itemValue === '' || imageValue === ''){
+        showFeedback('Name or image can not be empty');
+    } else {
+        postItemAPI(itemValue, imageValue);
+        itemInput.value = '';
+        imageInput.value = '';
+    }
+}
+
 // load
 
 document.addEventListener('DOMContentLoaded', function(){
     getItemsAPI(showItems);
 })
+
+
+//feedback
+
+function showFeedback(text){
+  feedback.classList.add('showItem');
+  feedback.innerHTML = `<p>${text}</p>`;
+
+  setTimeout(()=>{
+      feedback.classList.remove('showItem')
+  }, 4000)
+}
 
 // get items from API
 
@@ -62,6 +92,15 @@ function showItems(data){
                 </div>
         </li>`
     })
+     
+    itemList.innerHTML = info;
     
-    
+}
+
+// Post items
+
+function postItemAPI(img, itemName){
+    const avatar = `img/${img}.jpeg`;
+    const name = itemName;
+
 }
