@@ -8,6 +8,7 @@
 body {
   background: var(--mainWhite);
   color: var(--mainDark);
+  font-family: 'Lato', sans-serif;
 }
 .submitBtn {
   color: var(--mainOrange);
