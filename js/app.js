@@ -187,11 +187,49 @@ function editItemUI(parent, itemImg, name, itemID){
     editedItemID = itemID;
     submtiBtn.innerHTML = `Edit Item`;
     httpForm.removeEventListener('submit', submitItems);
-    httpForm.addEventListener('sumbit', editItemAPI);
+    httpForm.addEventListener('submit', editItemAPI);
 }
 
 // function to edit item API
 
 function editItemAPI(){
+    event.preventDefault();
+    const id = editedItemID;
+
+    const itemValue = itemInput.value;
+    const imageValue = imageInput.value;
+
+    if (itemValue === '' || imageValue === ''){
+        showFeedback('Name or image can not be empty');
+    } else {
+        const img = `img/${imageValue}.jpeg`;
+        const name = itemValue;
+        
+        const url = `https://5f11228a65dd950016fbd036.mockapi.io/items/${id}`;
+
+        const ajax = new XMLHttpRequest();
     
+        ajax.open('PUT', url, true);
+    
+        ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    
+        ajax.onload = function(){
+           reverseForm();
+        }
+    
+        ajax.onerror = function(){
+            console.log('there was an error');
+        }
+    
+        ajax.send(`avatar=${img}&name=${name}`);
+    }
+}
+
+function reverseForm(){
+    itemInput.value = '';
+    imageInput.value = '';
+    submtiBtn.innerHTML = `Add item`;
+    httpForm.removeEventListener('submit', editItemAPI);
+    httpForm.addEventListener('submit', submitItems);
+    getItemsAPI(showItems);
 }
