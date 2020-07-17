@@ -3,7 +3,7 @@
 > This is a practice project on fetching data from the API, posting new data and also editing data using HTTP methods. The app uses the old way of XMLHttpRequest method to fetch data.
 
 
-![screenshot](./img/items.png)
+![screenshot](./dist/img/items.png)
 
 
 ## Built With
