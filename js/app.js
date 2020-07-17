@@ -125,7 +125,7 @@ function postItemAPI(img, itemName){
 // get icons
 
 function getIcons(){
-    const getIcon = document.querySelectorAll('.edit-icon');
+    const editIcon = document.querySelectorAll('.edit-icon');
     const deleteIcon = document.querySelectorAll('.delete-icon');
 
     deleteIcon.forEach(icon => {
@@ -144,7 +144,7 @@ function getIcons(){
             const parent = event.target.parentElement.parentElement.parentElement;
             const img = document.querySelector('.itemImage').src;
             const name = document.querySelector('.itemName').textContent;
-            
+            editItemUI(parent, img, name, itemID);
         })
     })
 }
@@ -171,4 +171,27 @@ function deleteItemAPI(id){
     }
 
     ajax.send();
+}
+
+// edit
+
+function editItemUI(parent, itemImg, name, itemID){
+    event.preventDefault();
+    itemList.removeChild(parent);
+
+    const imgIndex = itemImg.indexOf('img/');
+    const jpegIndex = itemImg.indexOf('.jpeg');
+    const img = itemImg.slice(imgIndex + 4, jpegIndex);
+    itemInput.value = name.trim();
+    imageInput.value = img;
+    editedItemID = itemID;
+    submtiBtn.innerHTML = `Edit Item`;
+    httpForm.removeEventListener('submit', submitItems);
+    httpForm.addEventListener('sumbit', editItemAPI);
+}
+
+// function to edit item API
+
+function editItemAPI(){
+    
 }
