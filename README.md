@@ -12,7 +12,7 @@ So far the JSON file has these items to play around with: burger, burrito, cake,
 
 - HTML
 - CSS
-- java script
+- Javascript
 - Webpack
 
 
@@ -31,7 +31,6 @@ Open your terminal or text editor and use next command
 
 After if you want to do any changes please create new branch, after changes open pull request.
 Happy coding! 
-
 
 
 ## Author
