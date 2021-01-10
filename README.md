@@ -1,6 +1,6 @@
 # Project: Practicing with API
 
-> This is a practice project on fetching data from the API, posting new data and also editing data using HTTP methods. The app uses the old way of XMLHttpRequest method to fetch data. I have created my own JSON file that is stored on this <a href="https://mockapi.io/">Mock API website</a> and created my end points from it. 
+This is a practice project on fetching data from the API, posting new data and also editing data using HTTP methods. The app uses the old way of XMLHttpRequest method to fetch data. I have created my own JSON file that is stored on this <a href="https://mockapi.io/">Mock API website</a> and created my end points from it. 
 
 So far the JSON file has these items to play around with: burger, burrito, cake, default, pancake, pasta, salad, salmon and steak. So you can add, edit and delete these items with their images. In place of inputting images, you just write the name of the item, and automatically, it will display the image file of the item required.
 
